@@ -2,80 +2,74 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Weather</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./assets/css/bootstrap.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <title>Weather</title>
 </head>
 
 <body>
-    <div class="container">
-        <div class="weather">
-            <h1 class="header">Weather Vibe</h1>
-            <div class="cards">
-                <div class="card">
-                    <div class="city text-center" id="">
-                        <label for="ct">City Name :</label>
-                        <input type="text" class="form-control my-3" name="" id="ct">
-                    </div>
-                    <button class="btn btn-danger my-3" id="btn">Click me</button>
-                   
-                    <div class="temp">
-                     
-                        <span class="deg" id="demo"></span>
-                        <p id="img"></p>
 
-                    </div>
-                </div>
 
-                
-            </div>
-        </div>
+  <div class="card">
+    <div class="search">
+      <input type="text" placeholder="Heyy! I provide weather details" spellcheck="false" id="city" />
+      <button id="btn">
+        <i class="bi bi-search text-white"></i>
+      </button>
     </div>
+    <div>
+      <img src="" alt="" id="weatherIcon">
+    </div>
+    <h1 class="temp" id="temp"></h1>
+    <h2 class="city" id="name"></h2>
+   
+    <div class="d-flex justify-content-between">
+      <div>
+        <div>
+          <img src="https://www.svgrepo.com/show/26690/humidity.svg" alt="" width="100">
+        </div>
+        <p>humidity</p>
+        <span id="humidity">22%</span>
+      </div>
+      <div>
+        <div>
+          <img src="https://www.svgrepo.com/show/14493/wind.svg" alt="" width="100">
+        </div>
+        <p>wind</p>
+        <span id="wind">4.26 kmph</span>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script>
+  let cityname = document.getElementById("city");
+ 
+  let clickbtn = document.getElementById("btn")
+
+  clickbtn.addEventListener("click", function () {
+    let key = `0ca974911d5d0652911e1e20ec9cf566`;
+    let weatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityname.value}&units=metric&appid=${key}`
+    fetch(weatherURL)
+      .then((res) => {
+        return res.json()
+      })
+      .then((res) => {
+        console.log(res);
+      
+        document.getElementById("temp").innerHTML = `${res.main.temp }&#8451`;
+        document.getElementById("name").innerHTML = res.name;
+        document.getElementById("humidity").innerHTML = `${res.main.humidity}%`;
+        document.getElementById("wind").innerHTML = `${res.wind.speed} kmph`;
+        document.getElementById("weatherIcon").src = `https://openweathermap.org/img/wn/${res.weather[0].icon}@2x.png`
+
+      })
+  })
+
+</script>
 </body>
 
 </html>
-
-
- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./assets/css/bootstrap.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
-</head>
-
-<body>
-    
-    <script src="./assets/js/bootstrap.js"></script>
-    <script>
-        let key = `0ca974911d5d0652911e1e20ec9cf566`;
-        let clickbtn = document.getElementById("btn").addEventListener("click", function () {
-
-           
-            let cityname = document.getElementById("ct").value;
-            let URL = `https://api.openweathermap.org/data/2.5/weather?q=${cityname}&units=metric&appid=${key}`
-            fetch(URL).then((res) => {
-                return res.json()
-            }).then((res) => {
-          
-            document.getElementById("demo").innerHTML = ` <img src="https://openweathermap.org/img/wn/${res.weather[0].icon}@2x.png" alt="" width="100px">   `;
-            document.getElementById("img").innerHTML = res.main.temp
-
-                
-            })
-        })
-
-
-
-
-
-
-    </script>
-
-</body>
-
- </html>

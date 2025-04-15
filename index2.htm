@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="app">
+        <input type="text" id="input" placeholder="enter city" />
+        <div class="more">
+            <div class="close">
+                <ion-icon id="close" name="close-circle"></ion-icon>
+            </div>
+            <div class="rows">
+                <div class="box">
+    
+                    <p id="feels-like">feels like</p>
+                    <img src="https://github.com/AnnaSmith3110/openWeather-API/blob/main/hot%20cold%20png.png?raw=true"
+                        id="icon">
+    
+                </div>
+                <div class="box">
+    
+                    <p id="rain">rain</p>
+                    <img src="https://github.com/AnnaSmith3110/openWeather-API/blob/main/umbrella%20png.png?raw=true"
+                        id="icon">
+                </div>
+            </div>
+            <div class="rows">
+                <div class="box">
+    
+                    <p id="wind-speed">wind</p>
+                    <img src="https://github.com/AnnaSmith3110/openWeather-API/blob/main/wind%20direction%20png.png?raw=true"
+                        id="icon">
+    
+                </div>
+                <div class="box">
+    
+                    <p id="visibility">visibility</p>
+                    <img src="https://github.com/AnnaSmith3110/openWeather-API/blob/main/visibility%20png.png?raw=true"
+                        id="icon">
+                </div>
+            </div>
+        </div>
+        <div class="description">
+            <p id="desc"></p>
+        </div>
+        <div class="icon">
+            <img src="https://github.com/AnnaSmith3110/openWeather-API/blob/main/sunny%20png.png?raw=true"
+                id="weather-status-icon">
+        </div>
+        <div class="temperature">
+            <p>weather</p>
+            <h id="temp">t °c</h>
+        </div>
+        <div class="additional-info">
+            <div class="cube">
+                <div class="row">
+                    <p>humidity</p>
+                </div>
+                <div class="row">
+                    <img src="https://github.com/AnnaSmith3110/openWeather-API/blob/main/drop%20png.png?raw=true"
+                        id="cube-img">
+                </div>
+                <div class="row">
+                    <p1 id="humidity">humid</p1>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="row">
+                    <p>wind</p>
+                </div>
+                <div class="row">
+                    <img src="https://github.com/AnnaSmith3110/openWeather-API/blob/main/wind%20png.png?raw=true"
+                        id="cube-img">
+                </div>
+                <div class="row">
+                    <p1 id="wind">wind</p1>
+                </div>
+            </div>
+            <div class="cube">
+                <ion-icon id="more" name="chevron-up"></ion-icon>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
+
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Oxygen&display=swap");
+
+    :root {
+        --bg: #feecfc;
+        --snow: #7d39ff;
+        --snow-text: #ffebff;
+        --rain: #0181ff;
+        --rain-text: #c6f2ff;
+        --sunny: #fc8600;
+        --sunny-text: #fff9e9;
+        --hazy: #585344;
+        --clear: #988e34;
+        --cloudy: #909da2;
+        --misty: #7dada8;
+        --smoke: #9c4462;
+        --input-valid: #1c1d21;
+    }
+
+    *,
+    *:before,
+    *:after {
+        box-sizing: border-box;
+    }
+
+    body,
+    html {
+        height: 100vh;
+        width: 100vw;
+        padding: 0;
+        margin: 0;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-family: "Oxygen", sans-serif;
+        background: var(--bg);
+    }
+
+    ion-icon {
+        text-align: center;
+        font-size: 1.5em;
+        color: var(--sunny-text);
+    }
+
+    #more {
+        background: var(--input-valid);
+        -webkit-box-shadow: 1px 4px 10px 2px #1c1d21;
+        box-shadow: 1px 4px 10px 2px #1c1d21;
+        border-radius: 50%;
+        padding: 5px;
+    }
+
+    #close {
+        color: var(--input-valid);
+        font-size: 2em;
+        margin-left: auto;
+        padding: 20px;
+    }
+
+    h,
+    p {
+        padding-left: 20px;
+    }
+
+    h {
+        margin: 0;
+        font-size: 1.5em;
+        font-weight: 600;
+        color: var(--sunny-text);
+        text-transform: uppercase;
+    }
+
+    p {
+        font-size: 1em;
+        color: var(--sunny-text);
+    }
+
+    p1 {
+        font-size: 0.7em;
+        color: var(--sunny-text);
+    }
+
+    p::first-letter {
+        text-transform: uppercase;
+    }
+
+    #weather-status-icon {
+        height: 150px;
+        width: auto;
+    }
+
+    .app {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        height: 500px;
+        width: 300px;
+        border-radius: 10px;
+        background: var(--sunny);
+    }
+
+    input,
+    input:focus,
+    input:valid {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        outline: 0;
+        border: 0;
+        background: transparent;
+        text-align: center;
+        padding: 20px;
+        letter-spacing: 3px;
+        font-size: 1.5em;
+        font-weight: 600;
+        text-transform: capitalize;
+        color: var(--sunny-text);
+        font-family: "Oxygen", sans-serif;
+    }
+
+    input::placeholder {
+        color: var(--sunny-text);
+        padding: 20px;
+        letter-spacing: 2px;
+        font-family: "Oxygen", sans-serif;
+    }
+
+    input:valid {
+        background: var(--input-valid);
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 50px var(--input-valid) inset !important;
+    }
+
+    input:-webkit-autofill {
+        -webkit-text-fill-color: var(--sunny-text) !important;
+        -webkit-text-fill-background: var(--input-valid);
+    }
+
+    .description {
+        width: 30%;
+        height: 100px;
+    }
+
+    .description p {
+        display: table-caption;
+    }
+
+    .icon {
+        height: 180px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .temperature {
+        width: 50%;
+        height: 80px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .additional-info {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        height: 100px;
+    }
+
+    .cube {
+        text-align: center;
+        height: 80px;
+        width: 80px;
+        margin: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-item: center;
+    }
+
+    .cube p {
+        padding-left: 0;
+        font-size: 0.8em;
+        font-weight: 600;
+    }
+
+    #cube-img,
+    .cube-img {
+        height: 30px;
+        width: 30px;
+    }
+
+    .row {
+        text-align: center;
+        height: 30px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /*more info*/
+    .more {
+        margin-top: 70px;
+        height: 430px;
+        width: 300px;
+        position: absolute;
+        z-index: 1;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .close {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        flex-direction: row;
+        justify-content: row-reverse;
+        align-items: center;
+    }
+
+    .rows {
+        height: 150px;
+        width: 90%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .box {
+        width: 100px;
+        height: 100px;
+        border-radius: 10px;
+        -webkit-box-shadow: 1px 4px 10px 2px #1c1d21;
+        box-shadow: 1px 4px 10px 2px #1c1d21;
+        background: var(--input-valid);
+        color: var(--sunny-text);
+    }
+
+    .box>p {
+        font-size: 0.9em;
+    }
+
+    #icon {
+        height: 50px;
+        width: 50px;
+        padding: 5px;
+    }
+</style>
+<script>
+    //store weather img
+    //sunny, rainy, clear, snow, haze, cloudy, mist, smoke, default
+    const img = [
+        "https://github.com/AnnaSmith3110/openWeather-API/blob/main/sunny%20png.png?raw=true",
+        "https://github.com/AnnaSmith3110/openWeather-API/blob/main/rainy%20png.png?raw=true",
+        "https://github.com/AnnaSmith3110/openWeather-API/blob/main/clear%20png.png?raw=true",
+        "https://github.com/AnnaSmith3110/openWeather-API/blob/main/snow%20png.png?raw=true",
+        "https://github.com/AnnaSmith3110/openWeather-API/blob/main/haze%20png.png?raw=true",
+        "https://github.com/AnnaSmith3110/openWeather-API/blob/main/cloudy%20png.png?raw=true",
+        "https://github.com/AnnaSmith3110/openWeather-API/blob/main/mist%20png.png?raw=true",
+        "https://github.com/AnnaSmith3110/openWeather-API/blob/main/smoke%20png.png?raw=true",
+        ""
+    ];
+    //get vars
+    const bg = document.querySelector(".app");
+    const input = document.querySelector("#input");
+    const desc = document.querySelector("#desc");
+    const temp = document.querySelector("#temp");
+    const wind = document.querySelector("#wind");
+    const humid = document.querySelector("#humidity");
+    const status = document.querySelector("#weather-status-icon");
+    const moreButton = document.querySelector("#more");
+    const more = document.querySelector(".more");
+    const closeButton = document.querySelector("#close");
+    const feelsLike = document.querySelector("#feels-like");
+    const rain = document.querySelector("#rain");
+    const windSpeed = document.querySelector("#wind-speed");
+    const visibility = document.querySelector("#visibility");
+    //fetch API
+    input.addEventListener("input", function () {
+        fetch(
+            "https://api.openweathermap.org/data/2.5/weather?q=" +
+            input.value +
+            "&units=metric&appid=412d12d981a20fc78e27a8684c2a0ecd"
+        )
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+
+                var description = data["weather"][0]["description"];
+                var Temp = data["main"]["temp"];
+                //alert(typeof(Temp));
+                var kelvin = Temp - 273.15;
+                var windspeed = data["wind"]["speed"];
+                var Humidity = data["main"]["humidity"];
+                var feelslike = data["main"]["feels_like"];
+                var temp_min = data["main"]["temp_min"];
+                var temp_max = data["main"]["temp_max"];
+
+                var visible = data["visibility"];
+
+                desc.innerHTML = description;
+                temp.innerHTML = Temp + "° c";
+                wind.innerHTML = windspeed;
+                humid.innerHTML = Humidity;
+                feelsLike.innerHTML = "feels like " + feelslike + " ° c";
+                // rain.innerHTML = "rain " + Rain;
+                windSpeed.innerHTML = "windspeed " + windspeed;
+                visibility.innerHTML = "visibility " + visible;
+
+                //change pic according to weather data
+                let weather = data["weather"][0]["main"];
+                //valid status = sunny, rainy, clear, snow, haze, cloudy
+                switch (weather) {
+                    case "Sunny":
+                        status.src = img[0];
+                        bg.style.background = "var(--sunny)";
+                        more.style.background = "var(--sunny)";
+                        break;
+                    case "Rain":
+                        status.src = img[1];
+                        bg.style.background = "var(--rain)";
+                        more.style.background = "var(--rain)";
+                        break;
+                    case "Light intensity drizzle":
+                        status.src = img[1];
+                        bg.style.background = "var(--rain)";
+                        more.style.background = "var(--rain)";
+                        break;
+                    case "Clear":
+                        status.src = img[2];
+                        bg.style.background = "var(--clear)";
+                        more.style.background = "var(--clear)";
+                        break;
+                    case "Snow":
+                        status.src = img[3];
+                        bg.style.background = "var(--snow)";
+                        more.style.background = "var(--snow)";
+                        break;
+                    case "Haze":
+                        status.src = img[4];
+                        bg.style.background = "var(--hazy)";
+                        more.style.background = "var(--hazy)";
+                        break;
+                    case "Clouds":
+                        status.src = img[5];
+                        bg.style.background = "var(--cloudy)";
+                        more.style.background = "var(--cloudy)";
+                        break;
+                    case "Mist":
+                        bg.style.background = "var(--misty)";
+                        more.style.background = "var(--misty)";
+                        status.src = img[6];
+                        break;
+                    case "Smoke":
+                        bg.style.background = "var(--smoke)";
+                        more.style.background = "var(--smoke)";
+                        status.src = img[7];
+                        break;
+                    default:
+                        status.src = img[8];
+                }
+
+                console.log(data);
+            })
+            .catch((err) => console.log("error"));
+    });
+
+    //open more div
+    moreButton.addEventListener("click", function () {
+        more.style.display = "flex";
+        more.style.background = "inherit";
+    });
+
+    //close more div
+    closeButton.addEventListener("click", function () {
+        more.style.display = "none";
+        more.style.background = "inherit";
+    });
+
+</script>
