@@ -13,7 +13,7 @@ body {
 .card {
   background: linear-gradient(to bottom, #c2e9fb, #fbc2eb);
   border-radius: 20px;
-  width: 300px;
+  width: 350px;
   padding: 20px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   text-align: center;
@@ -34,7 +34,7 @@ body {
   outline: none;
   background: transparent;
   color: white;
-  font-size: 1rem;
+  font-size: 15px;
   flex: 1;
   padding-left: 10px;
 }
@@ -44,6 +44,13 @@ body {
   border: none;
   outline: none;
   cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+  color: #ffffff;
+}
+
+.search button:hover {
+  transform: scale(1.2);
+  color: #00bcd4;
 }
 
 .search i {
@@ -62,6 +69,7 @@ body {
   font-weight: 700;
   color: #2d2d2d;
 }
+
 
 #weatherIcon {
   width: 100px;
