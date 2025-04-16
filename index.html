@@ -11,9 +11,10 @@
 </head>
 
 <body>
-
-
+<section class="bg">
+  
   <div class="card">
+
     <div class="search">
       <input type="text" placeholder="Heyy! I provide weather details" spellcheck="false" id="city" />
       <button id="btn">
@@ -43,33 +44,50 @@
       </div>
     </div>
   </div>
-</body>
+</section>
 
-<script>
-  let cityname = document.getElementById("city");
 
-  let clickbtn = document.getElementById("btn")
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    let cityname = document.getElementById("city");
 
-  clickbtn.addEventListener("click", function () {
-    let key = `0ca974911d5d0652911e1e20ec9cf566`;
-    let weatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityname.value}&units=metric&appid=${key}`
-    fetch(weatherURL)
-      .then((res) => {
-        return res.json()
-      })
-      .then((res) => {
-        console.log(res);
+    let clickbtn = document.getElementById("btn")
 
-        document.getElementById("temp").innerHTML = `${res.main.temp}&#8451`;
-        document.getElementById("name").innerHTML = res.name;
-        document.getElementById("humidity").innerHTML = `${res.main.humidity}%`;
-        document.getElementById("wind").innerHTML = `${res.wind.speed} kmph`;
-        document.getElementById("weatherIcon").src = `https://openweathermap.org/img/wn/${res.weather[0].icon}@2x.png`
+    clickbtn.addEventListener("click", function () {
+      let key = `0ca974911d5d0652911e1e20ec9cf566`;
+      let weatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityname.value}&units=metric&appid=${key}`
+      fetch(weatherURL)
+        .then((res) => {
+          return res.json()
+        })
+        .then((res) => {
+          console.log(res);
 
-      })
-  })
+          if (res.cod !== 200) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'No City Found! Please try again.',
+            });
+            document.getElementById("city").value = "";
+            document.getElementById("name").innerHTML = "";
+            document.getElementById("temp").innerHTML = "";
+            document.getElementById("humidity").innerHTML = "";
+            document.getElementById("wind").innerHTML = "";
+            document.getElementById("weatherIcon").src = "";
+            return;
+          }
 
-</script>
+          document.getElementById("temp").innerHTML = `${res.main.temp}&#8451`;
+          document.getElementById("name").innerHTML = res.name;
+          document.getElementById("humidity").innerHTML = `${res.main.humidity}%`;
+          document.getElementById("wind").innerHTML = `${res.wind.speed} kmph`;
+          document.getElementById("weatherIcon").src = `https://openweathermap.org/img/wn/${res.weather[0].icon}@2x.png`
+
+        })
+    })
+
+  </script>
 </body>
 
 </html>
